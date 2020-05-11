@@ -1,0 +1,28 @@
+{
+   "dayProfile":{
+      "doctorTimings":{
+         "timings":[
+            "10",
+            "11",
+            "12",
+            "3",
+            "4"
+         ]
+      },
+      "assistantTimings":{
+         "timings":[
+            "1",
+            "2",
+            "3"
+         ]
+      },
+      "Hygienist":{
+         "timings":[
+            "10",
+            "11",
+            "2",
+            "3"
+         ]
+      }
+   }
+}
