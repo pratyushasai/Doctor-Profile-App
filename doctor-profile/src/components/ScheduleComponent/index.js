@@ -1,17 +1,34 @@
 import React, { Component } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import './styles.scss'
-import dayProfile from './../../initialState.json'
+import Availability from './../../initialState.json';
+import {connect} from 'react-redux'
+import constants from './../../constants'
 
 
+const mapStateToProps=(state)=>{
+	return {
+		IsModalUp:state
+	}
+}
 
+const mapDispatchToProps=(dispatch)=>{
+	return{
+		IsModalUp:dispatch(constants.ADD_AVAILABILITY)
+	}
+}
 
 class ScheduleComponent extends Component{
+	constructor(props) {
+    	super(props);
+    	this.state ={ ...Availability,IsModalUp:false};
+    	console.log(this.state,"check here")
+  	}
+
 	render(){
-		const availableTimes=[8,9,10,11,12,1,2,3]
 		return (
 			<div className="scheduleComponentContainer">
-			<Button variant="primary" className="btn-availability">ADD AVAILABILITY</Button>{' '}
+			<Button variant="primary" className="btn-availability" >ADD AVAILABILITY</Button>{' '}
 			<Table responsive className="tableContainer">
 				<thead>
     				<tr>
@@ -22,7 +39,7 @@ class ScheduleComponent extends Component{
     				</tr>
     			</thead>
     			<tbody>
-    				{availableTimes.map(renderRow)}
+    				{this.state.Availability.hours.map(renderRow)}
     			</tbody>
     		</Table>
 			</div>
@@ -30,17 +47,31 @@ class ScheduleComponent extends Component{
 	}
 
 
+	componentDidMount(){
+
+	}
+
 }
 
-const renderRow=(i)=>{
+const renderRow=(hourAvailability)=>{
+	var x=hourAvailability.doctorAvailability
 	return(
-		<tr key={i}>
-			<td>{i}</td>
-			<td id={"Doc"+i}></td>
-			<td id={"Assistant"+i}></td>
-			<tdid={"Hygienist"+i}></td>
+		<tr key={hourAvailability.hour}>
+			<td>
+				{hourAvailability.hour}
+			</td>
+			<td bgcolor={hourAvailability.doctorAvailability=="true"? "green":"blue"}>
+			</td>
+			<td bgcolor={hourAvailability.assistantAvailability=="true"? "green":"blue"}>
+			</td>
+			<td bgcolor={hourAvailability.hygienistAvailability=="true"? "green":"blue"}>
+			</td>
 		</tr>
 		)
 }
 
-export default ScheduleComponent;
+
+export default connect(
+  mapStateToProps
+)(ScheduleComponent)
+

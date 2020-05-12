@@ -1,0 +1,7 @@
+const constants = {
+	ADD_AVAILABILITY: "ADD_AVAILABILITY",
+	SAVE_AVAILABILITY:"SAVE_AVAILABILITY",
+	CLOSE_MODAL:"CLOSE_MODAL"
+}
+
+export default constants
