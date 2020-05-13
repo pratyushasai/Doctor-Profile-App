@@ -13,4 +13,4 @@ const store=createStore(appReducer)
 
 // console.log(store.getState(),"finalState")
 
-export default store
+export default store;

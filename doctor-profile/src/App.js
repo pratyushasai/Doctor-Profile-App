@@ -13,9 +13,8 @@ function App() {
       <header>
        Dr.Profile
       </header>  
-     
-          <ScheduleComponent/>
-
+      	{console.log(store.getState(),"store")}
+      	<ScheduleComponent/>
     </div>
     </Provider>
   );

@@ -1,47 +1,15 @@
 {
-	"Availability": {
-		"hours": [{
-					"hour":"9",
-					"doctorAvailability": "true",
-					"assistantAvailability": "false",
-					"hygienistAvailability": "false"
-			},
-			{
-					"hour":"10",
-					"doctorAvailability": "false",
-					"assistantAvailability": "false",
-					"hygienistAvailability": "false"
-			},
-			{
-					"hour":"11",
-					"doctorAvailability": "false",
-					"assistantAvailability": "false",
-					"hygienistAvailability": "false"
-			},
-			{
-					"hour":"12",
-					"doctorAvailability": "true",
-					"assistantAvailability": "true",
-					"hygienistAvailability": "true"
-			},
-			{
-					"hour":"1",
-					"doctorAvailability": "false",
-					"assistantAvailability": "false",
-					"hygienistAvailability": "false"
-			},
-			{
-					"hour":"2",
-					"doctorAvailability": "false",
-					"assistantAvailability": "false",
-					"hygienistAvailability": "false"
-			},
-			{
-					"hour":"3",	
-					"doctorAvailability": "true",
-					"assistantAvailability": "false",
-					"hygienistAvailability": "false"
-			}
-		]
-	}
+		"Doctor":{
+			"Name":"Stephen",
+			"Timings":[9,12]
+		},
+		"Assistant":{
+			"Name":"Jacob",
+			"Timings":[9,10,11]
+		},
+		"Higenist":{
+			"Name":"Nancy",
+			"Timings":[2,3]
+		},
+		"isModalUp":false
 }

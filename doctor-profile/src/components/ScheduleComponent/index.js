@@ -1,36 +1,54 @@
 import React, { Component } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import './styles.scss'
-import Availability from './../../initialState.json';
 import {connect} from 'react-redux'
 import constants from './../../constants'
+import ModalComponent from './../ModalComponent'
+
 
 
 const mapStateToProps=(state)=>{
+	console.log(state.reducer,"state in mapStateToProps")
 	return {
-		IsModalUp:state
+		IsModalUp:state.reducer.isModalUp,
+		Doctor:{
+			Timings:state.reducer.Doctor.Timings
+		},
+		Assistant:{
+			Timings:state.reducer.Assistant.Timings
+		},
+		Higenist:{
+			Timings:state.reducer.Higenist.Timings
+		}
 	}
 }
 
 const mapDispatchToProps=(dispatch)=>{
 	return{
-		IsModalUp:dispatch(constants.ADD_AVAILABILITY)
+		onClickHandle:()=>dispatch({type: constants.ADD_AVAILABILITY,
+        payload: true})
 	}
 }
 
+
+
+
+
 class ScheduleComponent extends Component{
-	constructor(props) {
-    	super(props);
-    	this.state ={ ...Availability,IsModalUp:false};
-    	console.log(this.state,"check here")
-  	}
+
 
 	render(){
-		return (
+		let officeTimings=[9,10,11,12,1,2,3]
+		let rowObjectArray=officeTimings.map((i)=>{return {hour:i,
+							doctorAvailability:this.props.Doctor.Timings.includes(i)?true:false,
+							hygienistAvailability:this.props.Higenist.Timings.includes(i)?true:false,
+							assistantAvailability:this.props.Assistant.Timings.includes(i)?true:false}})
+		console.log(rowObjectArray,"rowObjectArray")
+		return(
 			<div className="scheduleComponentContainer">
-			<Button variant="primary" className="btn-availability" >ADD AVAILABILITY</Button>{' '}
-			<Table responsive className="tableContainer">
-				<thead>
+			<Button  onClick={this.props.onClickHandle}  >ADD AVAILABILITY</Button>
+			<Table responsive className="tableContainer">	
+			<thead>
     				<tr>
       					<th>#</th>
       					<th>Doctor</th>
@@ -39,39 +57,35 @@ class ScheduleComponent extends Component{
     				</tr>
     			</thead>
     			<tbody>
-    				{this.state.Availability.hours.map(renderRow)}
+    			    	{rowObjectArray.map(renderRow)}
     			</tbody>
-    		</Table>
+			</Table>	
+				{this.props.IsModalUp?<ModalComponent/>:null}		
 			</div>
 			)
 	}
-
-
-	componentDidMount(){
-
-	}
-
 }
-
 const renderRow=(hourAvailability)=>{
-	var x=hourAvailability.doctorAvailability
 	return(
 		<tr key={hourAvailability.hour}>
 			<td>
 				{hourAvailability.hour}
 			</td>
-			<td bgcolor={hourAvailability.doctorAvailability=="true"? "green":"blue"}>
+			<td bgcolor={hourAvailability.doctorAvailability==true? "green":"blue"}>
 			</td>
-			<td bgcolor={hourAvailability.assistantAvailability=="true"? "green":"blue"}>
+			<td bgcolor={hourAvailability.assistantAvailability==true? "green":"blue"}>
 			</td>
-			<td bgcolor={hourAvailability.hygienistAvailability=="true"? "green":"blue"}>
+			<td bgcolor={hourAvailability.hygienistAvailability==true? "green":"blue"}>
 			</td>
 		</tr>
 		)
-}
+	}
+
+	
 
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ScheduleComponent)
 
