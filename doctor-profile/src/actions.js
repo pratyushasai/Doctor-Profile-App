@@ -6,6 +6,7 @@ export const addAvailability = () =>
         payload: true
     })
 
+
  // export const closeModal = () => 
  //    ({
  //        type: constants.CLOSE_MODAL,

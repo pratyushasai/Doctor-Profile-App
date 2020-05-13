@@ -4,6 +4,7 @@ import './styles.scss'
 import {connect} from 'react-redux'
 import constants from './../../constants'
 import ModalComponent from './../ModalComponent'
+import {addAvailability} from './../../actions'
 
 
 
@@ -23,12 +24,34 @@ const mapStateToProps=(state)=>{
 	}
 }
 
+
 const mapDispatchToProps=(dispatch)=>{
 	return{
-		onClickHandle:()=>dispatch({type: constants.ADD_AVAILABILITY,
-        payload: true})
+		onClickHandle:()=>dispatch({type: constants.TOGGLE_MODAL,
+        payload: true}),
+        handleClose:()=>dispatch({type: constants.TOGGLE_MODAL,
+        payload:false}),
+        handleSave:()=>{
+        	let x="Doctor"
+        	switch (x){
+        		case "Doctor":
+        			dispatch({type:constants.SAVE_DOCTOR_AVAILABILITY,
+        				payload:[2,3]})
+        			break;
+        		case  "Assistant":
+        			dispatch({type:constants.SAVE_ASSISTANT_AVAILABILITY,
+        				payload:[2,3]})
+        			break;
+        		case "Higenist":
+        			dispatch({tupe:constants.SAVE_HIGENIST_AVAILABILITY,
+        				payload:[2,3]})
+        			break;
+        	}
+
+        }
 	}
 }
+
 
 
 
@@ -60,7 +83,7 @@ class ScheduleComponent extends Component{
     			    	{rowObjectArray.map(renderRow)}
     			</tbody>
 			</Table>	
-				{this.props.IsModalUp?<ModalComponent/>:null}		
+				{this.props.IsModalUp?<ModalComponent handleClose={this.props.handleClose} handleSave={this.props.handleSave}/>:null}		
 			</div>
 			)
 	}
@@ -71,11 +94,11 @@ const renderRow=(hourAvailability)=>{
 			<td>
 				{hourAvailability.hour}
 			</td>
-			<td bgcolor={hourAvailability.doctorAvailability==true? "green":"blue"}>
+			<td bgcolor={hourAvailability.doctorAvailability==true? "green":"grey"}>
 			</td>
-			<td bgcolor={hourAvailability.assistantAvailability==true? "green":"blue"}>
+			<td bgcolor={hourAvailability.assistantAvailability==true? "green":"grey"}>
 			</td>
-			<td bgcolor={hourAvailability.hygienistAvailability==true? "green":"blue"}>
+			<td bgcolor={hourAvailability.hygienistAvailability==true? "green":"grey"}>
 			</td>
 		</tr>
 		)

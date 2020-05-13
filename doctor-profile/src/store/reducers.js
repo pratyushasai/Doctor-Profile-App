@@ -7,8 +7,8 @@ export const reducer=(state=Availability,action)=>{
   const newState={...state}
   console.log(Availability,"initialState")
   switch (action.type) {
-    case constants.ADD_AVAILABILITY:
-      newState.isModalUp=true
+    case constants.TOGGLE_MODAL:
+      newState.isModalUp=action.payload
       break;
     case constants.SAVE_DOCTOR_AVAILABILITY:
       newState.Doctor.Timings=[...state.Doctor.Timings,...action.payload]
