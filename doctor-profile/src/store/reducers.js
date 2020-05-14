@@ -12,12 +12,15 @@ export const reducer=(state=Availability,action)=>{
       break;
     case constants.SAVE_DOCTOR_AVAILABILITY:
       newState.Doctor.Timings=[...state.Doctor.Timings,...action.payload]
+      newState.isModalUp=false
       break;
     case constants.SAVE_ASSISTANT_AVAILABILITY:
       newState.Assistant.Timings=[...state.Assistant.Timings,...action.payload]
+      newState.isModalUp=false
       break;
     case constants.SAVE_HIGENIST_AVAILABILITY:
       newState.Higenist.Timings=[...state.Higenist.Timings,...action.payload]
+      newState.isModalUp=false
       break;
     }
   return newState

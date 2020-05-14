@@ -1,19 +1,13 @@
-.tableContainer{
-	width: 70%;
-    margin-left: 15%;
+.scheduleComponentContainer{
+	width: 60%;
+    margin-left: 16rem;
+    margin-right: 14rem;
+    margin-top: 4rem;
 }
 
 .btn-availability{
-	width: 15%;
-    position: absolute;
-    right: 17%;
-}
-
-.available{
-	background-color: blue;
-}
-
-.unavailable{
-	 background-color: red;
+	position: relative;
+	left: 26rem;
+    margin-bottom: 2rem;
 }
 

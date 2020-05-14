@@ -11,7 +11,9 @@ function App() {
   	<Provider store={store}>
     <div className="App">
       <header>
+      <h1>
        Dr.Profile
+       </h1>
       </header>  
       	{console.log(store.getState(),"store")}
       	<ScheduleComponent/>

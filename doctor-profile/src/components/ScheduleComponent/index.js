@@ -4,7 +4,6 @@ import './styles.scss'
 import {connect} from 'react-redux'
 import constants from './../../constants'
 import ModalComponent from './../ModalComponent'
-import {addAvailability} from './../../actions'
 
 
 
@@ -66,11 +65,10 @@ class ScheduleComponent extends Component{
 							doctorAvailability:this.props.Doctor.Timings.includes(i)?true:false,
 							hygienistAvailability:this.props.Higenist.Timings.includes(i)?true:false,
 							assistantAvailability:this.props.Assistant.Timings.includes(i)?true:false}})
-		console.log(rowObjectArray,"rowObjectArray")
 		return(
 			<div className="scheduleComponentContainer">
-			<Button  onClick={this.props.onClickHandle}  >ADD AVAILABILITY</Button>
-			<Table responsive className="tableContainer">	
+			<Button className="btn-availability"  onClick={this.props.onClickHandle}  >ADD AVAILABILITY</Button>
+			<Table responsive>	
 			<thead>
     				<tr>
       					<th>#</th>
@@ -88,17 +86,24 @@ class ScheduleComponent extends Component{
 			)
 	}
 }
+
+
 const renderRow=(hourAvailability)=>{
+	let greenColor="#c7f0ca"
+	let greyColor="#f5f7f5"
 	return(
 		<tr key={hourAvailability.hour}>
 			<td>
-				{hourAvailability.hour}
+				{(hourAvailability.hour.toString()).concat(": 00")}
 			</td>
-			<td bgcolor={hourAvailability.doctorAvailability==true? "green":"grey"}>
+			<td bgcolor={hourAvailability.doctorAvailability==true? greenColor:greyColor}>
+				{hourAvailability.doctorAvailability==true?"Available":""}
 			</td>
-			<td bgcolor={hourAvailability.assistantAvailability==true? "green":"grey"}>
+			<td bgcolor={hourAvailability.assistantAvailability==true? greenColor:greyColor}>
+			{hourAvailability.assistantAvailability==true?"Available":""}
 			</td>
-			<td bgcolor={hourAvailability.hygienistAvailability==true? "green":"grey"}>
+			<td bgcolor={hourAvailability.hygienistAvailability==true? greenColor:greyColor}>
+			{hourAvailability.hygienistAvailability==true?"Available":""}
 			</td>
 		</tr>
 		)

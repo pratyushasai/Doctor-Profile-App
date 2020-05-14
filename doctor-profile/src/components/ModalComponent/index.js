@@ -4,11 +4,27 @@ import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {DropdownButton,Dropdown, Button} from 'react-bootstrap'
 
+
+
 class ModalComponent extends Component{
   constructor(props){
     super(props);
+    this.selectPerson=React.createRef()
+    this.startTime=React.createRef()
+    this.endTime=React.createRef()
 
   }
+
+  getData=()=>{
+  let startTime=this.startTime.current.value
+  let endTime=this.endTime.current.value
+  let array=[]
+  for (let i=startTime;i<endTime;i++){
+      array.append(i)
+  }
+  console.log(this.selectPerson.current.value,array,startTime,endTime,"here")
+
+}
   render(){
     let officeTimings=[9,10,11,12,1,2,3]
     return (
@@ -19,31 +35,29 @@ class ModalComponent extends Component{
       <Modal.Body>
       <div id="formContainer">
             <p>Select a column</p>
-            <DropdownButton id="dropdown-basic-button" title="Select...">
-              <Dropdown.Item href="#/action-1">Doctor</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Assistant</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Hygienist</Dropdown.Item>
-            </DropdownButton>
+            <select ref={this.selectPerson}>
+            <option value="Doctor">Doctor</option>
+            <option value="Assistant">Assistant</option>
+            <option value="Hygienist">Hygienist</option>
+            </select>
 
             <p>Select a start time</p>
-            <div className="startTime">
-            <DropdownButton id="dropdown-basic-button" title="Hour">
-            {officeTimings.map((i)=><Dropdown.Item >{i}</Dropdown.Item>)}
-            </DropdownButton>
-            </div>
-
+            <select ref={this.startTime}>
+            {officeTimings.map((i)=><option value={i}>{(i.toString()).concat(": 00")}</option>)}
+            </select>
 
             <p>Select a end time</p>
-            <div className="endTime">
-            <DropdownButton id="dropdown-basic-button" title="Hour">
-            {officeTimings.map((i)=><Dropdown.Item >{i}</Dropdown.Item>)}
-            </DropdownButton>
-            </div> 
-            </div>
+            <select ref={this.endTime}>
+            {officeTimings.map((i)=><option value={i}>{(i.toString()).concat(": 00")}</option>)}
+            </select>
+        </div>
+           
+
+            
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={this.props.handleClose} variant="secondary">Close</Button>
-            <Button onClick={this.props.handleSave} variant="primary">Save changes</Button>
+            <Button onClick={this.getData} variant="primary">Save changes</Button>
         </Modal.Footer>
     </Modal>
       )
