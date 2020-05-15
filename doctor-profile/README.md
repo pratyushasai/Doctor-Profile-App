@@ -1,4 +1,6 @@
 Implementation Details: -
+
+
 This application built using two components one is the Scheduler component and the other is a modal component.
  I have considered that users can only input the start hour and end hour. (This could have been improved). I tried to focus much on implementation than adding more features to the application.
  I have implemented redux architecture for the state management in the scheduler component because it removes the hassle of state management.
