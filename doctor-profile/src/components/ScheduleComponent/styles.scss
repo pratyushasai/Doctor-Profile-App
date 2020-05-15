@@ -1,13 +1,21 @@
 .scheduleComponentContainer{
 	width: 60%;
-    margin-left: 16rem;
-    margin-right: 14rem;
-    margin-top: 4rem;
+    margin: auto;
 }
 
 .btn-availability{
-	position: relative;
-	left: 26rem;
-    margin-bottom: 2rem;
+	float: right;
+	margin-bottom: 2rem;
 }
+
+@media only screen and (max-width: 900px) {
+	.scheduleComponentContainer{
+	width: 40%;
+	}
+	.btn-availability{
+	float:none
+	}
+}
+
+
 

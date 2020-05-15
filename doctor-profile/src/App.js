@@ -8,14 +8,14 @@ import store from './store'
 
 function App() {
   return (
+    //making the store available for the components
   	<Provider store={store}>
     <div className="App">
       <header>
       <h1>
-       Dr.Profile
+       Dr.Profile !
        </h1>
       </header>  
-      	{console.log(store.getState(),"store")}
       	<ScheduleComponent/>
     </div>
     </Provider>

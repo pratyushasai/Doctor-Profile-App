@@ -6,9 +6,11 @@ import constants from './../../constants'
 import ModalComponent from './../ModalComponent'
 
 
+// considering the hard coded office hours
+let officeTimings=[8, 9, 10, 11, 12, 1, 2, 3, 4, 5];
 
+//This function will map incoming state from store to props for the current component
 const mapStateToProps=(state)=>{
-	console.log(state.reducer,"state in mapStateToProps")
 	return {
 		IsModalUp:state.reducer.isModalUp,
 		Doctor:{
@@ -24,26 +26,31 @@ const mapStateToProps=(state)=>{
 }
 
 
+// This function dispatches required actions to the store
 const mapDispatchToProps=(dispatch)=>{
 	return{
+		//action dispatched after "Add availability" button click and shows modal
 		onClickHandle:()=>dispatch({type: constants.TOGGLE_MODAL,
         payload: true}),
+
+        //action dispatched after clicking "close" in the modal
         handleClose:()=>dispatch({type: constants.TOGGLE_MODAL,
         payload:false}),
-        handleSave:()=>{
-        	let x="Doctor"
-        	switch (x){
+
+        //action dispatched for saving the details
+        handleSave:(role, arr)=>{
+        	switch (role){
         		case "Doctor":
         			dispatch({type:constants.SAVE_DOCTOR_AVAILABILITY,
-        				payload:[2,3]})
+        				payload:arr})
         			break;
         		case  "Assistant":
         			dispatch({type:constants.SAVE_ASSISTANT_AVAILABILITY,
-        				payload:[2,3]})
+        				payload:arr})
         			break;
-        		case "Higenist":
-        			dispatch({tupe:constants.SAVE_HIGENIST_AVAILABILITY,
-        				payload:[2,3]})
+        		case "Hygienist":
+        			dispatch({type:constants.SAVE_HIGENIST_AVAILABILITY,
+        				payload:arr})
         			break;
         	}
 
@@ -57,14 +64,18 @@ const mapDispatchToProps=(dispatch)=>{
 
 
 class ScheduleComponent extends Component{
+	
+
 
 
 	render(){
-		let officeTimings=[9,10,11,12,1,2,3]
+
+		//changing the format of the data to show it in a table row
 		let rowObjectArray=officeTimings.map((i)=>{return {hour:i,
 							doctorAvailability:this.props.Doctor.Timings.includes(i)?true:false,
 							hygienistAvailability:this.props.Higenist.Timings.includes(i)?true:false,
 							assistantAvailability:this.props.Assistant.Timings.includes(i)?true:false}})
+		
 		return(
 			<div className="scheduleComponentContainer">
 			<Button className="btn-availability"  onClick={this.props.onClickHandle}  >ADD AVAILABILITY</Button>
@@ -81,7 +92,7 @@ class ScheduleComponent extends Component{
     			    	{rowObjectArray.map(renderRow)}
     			</tbody>
 			</Table>	
-				{this.props.IsModalUp?<ModalComponent handleClose={this.props.handleClose} handleSave={this.props.handleSave}/>:null}		
+				{this.props.IsModalUp?<ModalComponent handleClose={this.props.handleClose} handleSave={this.props.handleSave} timings={this.props}/>:null}		
 			</div>
 			)
 	}
@@ -94,7 +105,7 @@ const renderRow=(hourAvailability)=>{
 	return(
 		<tr key={hourAvailability.hour}>
 			<td>
-				{(hourAvailability.hour.toString()).concat(": 00")}
+				{(hourAvailability.hour.toString()).concat(" : 00")}
 			</td>
 			<td bgcolor={hourAvailability.doctorAvailability==true? greenColor:greyColor}>
 				{hourAvailability.doctorAvailability==true?"Available":""}

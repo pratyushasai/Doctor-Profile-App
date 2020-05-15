@@ -2,10 +2,9 @@ import constants from "./../constants"
 import { combineReducers } from 'redux'
 import Availability from './../initialState.json';
 
-
+//reducer which take present state and changes to the next state and returns next state
 export const reducer=(state=Availability,action)=>{
   const newState={...state}
-  console.log(Availability,"initialState")
   switch (action.type) {
     case constants.TOGGLE_MODAL:
       newState.isModalUp=action.payload
