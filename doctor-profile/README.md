@@ -1,7 +1,7 @@
 Implementation Details: -
 
 
-This application built using two components one is the Scheduler component and the other is a modal component.
+This application built using three components They are scheduler component, modal component and resusable dropdown component.
 
  I have considered that users can only input the start hour and end hour. (This could have been improved). I tried to focus much on implementation than adding more features to the application.
 
